@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beautiful Love</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Add stars to background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #fff, transparent);
+            animation: shoot 3s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes shoot {
+            0% { 
+                transform: translateX(-100%) translateY(0) rotate(45deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateX(200%) translateY(-200%) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .moon {
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 50px #ffd700;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header {
+            margin: 50px 0;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: titlePulse 3s ease-in-out infinite;
+            font-weight: bold;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .love-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            animation: slideInLeft 1.5s ease-out;
+        }
+
+        .love-section:nth-child(even) {
+            animation: slideInRight 1.5s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .love-message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: floatHeart 10s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: sparkleFloat 3s linear infinite;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-50px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .love-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            margin: 20px 10px;
+            font-weight: bold;
+        }
+
+        .love-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+            background: linear-gradient(45deg, #ff5252, #ff7979);
+        }
+
+        .emoji-rain {
+            position: fixed;
+            top: -50px;
+            font-size: 25px;
+            animation: emojiDrop 8s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes emojiDrop {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .photo-frame {
+            width: 250px;
+            height: 250px;
+            border: 8px solid #fff;
+            border-radius: 50%;
+            margin: 20px auto;
+            background: linear-gradient(45deg, #ff6b6b, #ffeaa7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            animation: photoFloat 6s ease-in-out infinite;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .photo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Make the frame larger */
+        @media (min-width: 768px) {
+            .photo-frame {
+                width: 400px;
+                height: 400px;
+            }
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 50%;
+        }
+
+        .heart-overlay {
+            position: relative;
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.8));
+        }
+
+        @keyframes photoFloat {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            }
+            50% { 
+                transform: translateY(-10px) scale(1.05);
+                box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            }
+        }
+
+        .message-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            transform: perspective(1000px) rotateY(0deg);
+            transition: all 0.5s ease;
+        }
+
+        .message-card:hover {
+            transform: perspective(1000px) rotateY(5deg) translateZ(20px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .love-section {
+                padding: 20px;
+                margin: 20px 10px;
+            }
+            
+            .love-message {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">To My Beautiful Lovely Girlfriend</h1>
+            <p class="subtitle">You are my sunshine, my everything ✨</p>
+        </div>
+
+        <div class="photo-frame">
+            <div class="heart-overlay"></div>
+            <img src="nika.jpg" alt="Monika" class="photo-image">
+        </div>
+
+        <div class="love-section">
+            <div class="message-card">
+                <h2 style="color: #fff; font-size: 2rem; margin-bottom: 15px;">Why You're Amazing</h2>
+                <p class="love-message">
+                    Every day with you feels like magic. Your smile lights up my world, 
+                    and your laugh is the most beautiful melody I've ever heard. 
+                    You make ordinary moments extraordinary just by being you.
+                </p>
+            </div>
+        </div>
+
+        <div class="love-section">
+            <div class="message-card">
+                <h2 style="color: #fff; font-size: 2rem; margin-bottom: 15px;">My Promise to You</h2>
+                <p class="love-message">
+                    I promise to love you through every season of life, to support your dreams, 
+                    to make you laugh when you're sad, and to hold your hand through every adventure. 
+                    You are my heart, my home, my forever.
+                </p>
+            </div>
+        </div>
+
+        <div class="love-section">
+            <div class="message-card">
+                <h2 style="color: #fff; font-size: 2rem; margin-bottom: 15px;">What You Mean to Me</h2>
+                <p class="love-message">
+                    You are my best friend, my soulmate, my greatest love. 
+                    In a world full of temporary things, you are my constant. 
+                    Thank you for being the most incredible person I know.
+                </p>
+            </div>
+        </div>
+
+        <div style="margin: 50px 0;">
+            <button class="love-button" onclick="createHeartExplosion()">Send Love 💕</button>
+            <button class="love-button" onclick="createEmojiRain()">Make it Rain Hearts ❤️</button>
+        </div>
+
+        <div class="love-section" style="margin-top: 50px;">
+            <h2 style="color: #fff; font-size: 2.5rem; margin-bottom: 20px;">Forever Yours</h2>
+            <p style="font-size: 1.5rem; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                With all my love, always and forever 💖
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts background
+        function createFloatingHearts() {
+            const container = document.getElementById('heartsContainer');
+            const hearts = ['i love u', '💕', 'my bby gurl', '💝', 'my little lover', '💞', 'my kmeng toch', '❤️', '🥰', '😍'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 10000);
+            }, 1000);
+        }
+
+        // Create sparkles
+        function createSparkles() {
+            const container = document.getElementById('heartsContainer');
+            
+            setInterval(() => {
+                for(let i = 0; i < 3; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + 'vw';
+                    sparkle.style.animationDelay = Math.random() * 2 + 's';
+                    container.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 3000);
+                }
+            }, 1500);
+        }
+
+        // Heart explosion effect
+        function createHeartExplosion() {
+            const container = document.getElementById('heartsContainer');
+            const elements = [
+                '🌙', '⭐', '💖',     // Moon, star, heart
+                '🌛', '✨', '💝',     // Crescent moon, sparkles, heart with ribbon
+                '🌜', '🌟', '💕',     // Last quarter moon, glowing star, two hearts
+                '🌝', '🌠', '💗'      // Full moon face, shooting star, growing heart
+            ];
+            
+            for(let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = elements[Math.floor(Math.random() * elements.length)];
+                heart.style.position = 'fixed';
+                heart.style.left = '50%';
+                heart.style.top = '50%';
+                heart.style.fontSize = '30px';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '1000';
+                
+                const angle = (Math.PI * 2 * i) / 20;
+                const velocity = 200;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                heart.animate([
+                    { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+                    { transform: `translate(${vx}px, ${vy}px) scale(1)`, opacity: 0 }
+                ], {
+                    duration: 2000,
+                    easing: 'ease-out'
+                }).onfinish = () => heart.remove();
+                
+                container.appendChild(heart);
+            }
+        }
+
+        // Emoji rain effect
+        function createEmojiRain() {
+            const emojis = [
+                '🌙', '⭐', '💖',     // Moon, star, heart
+                '🌛', '✨', '💝',     // Crescent moon, sparkles, heart with ribbon
+                '🌜', '⚡', '💕',     // Last quarter moon, lightning, two hearts
+                '🌚', '🌟', '💓',     // New moon face, glowing star, beating heart
+                '🌝', '🌠', '💗',     // Full moon face, shooting star, growing heart
+                '🌕', '🎇', '💘'      // Full moon, sparkler, heart with arrow
+            ];
+            
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.className = 'emoji-rain';
+                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.style.left = Math.random() * 100 + 'vw';
+                    emoji.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(emoji);
+                    
+                    setTimeout(() => {
+                        emoji.remove();
+                    }, 8000);
+                }, i * 100);
+            }
+        }
+
+        // Initialize effects
+        createFloatingHearts();
+        createSparkles();
+
+        // Add some interactive hover effects
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.95) {
+                const sparkle = document.createElement('div');
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.width = '4px';
+                sparkle.style.height = '4px';
+                sparkle.style.background = '#fff';
+                sparkle.style.borderRadius = '50%';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '1000';
+                
+                sparkle.animate([
+                    { transform: 'scale(0)', opacity: 1 },
+                    { transform: 'scale(1)', opacity: 1 },
+                    { transform: 'scale(0)', opacity: 0 }
+                ], {
+                    duration: 1000,
+                    easing: 'ease-out'
+                }).onfinish = () => sparkle.remove();
+                
+                document.body.appendChild(sparkle);
+            }
+        });
+    </script>
+    <script>
+        function createStarryBackground() {
+            const starsContainer = document.createElement('div');
+            starsContainer.className = 'stars';
+            document.body.appendChild(starsContainer);
+
+            // Create moon
+            const moon = document.createElement('div');
+            moon.className = 'moon';
+            document.body.appendChild(moon);
+
+            // Create stars
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+                starsContainer.appendChild(star);
+            }
+
+            // Create shooting stars
+            setInterval(() => {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                shootingStar.style.top = Math.random() * 50 + 'vh';
+                shootingStar.style.left = Math.random() * 100 + 'vw';
+                starsContainer.appendChild(shootingStar);
+                
+                setTimeout(() => {
+                    shootingStar.remove();
+                }, 3000);
+            }, 8000);
+        }
+
+        // Initialize starry background
+        createStarryBackground();
+    </script>
+</body>
+</html>
